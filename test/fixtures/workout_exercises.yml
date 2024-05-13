@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workout_id: 1
+  exercisable_id: 1
+  exercisable_type: MyString
+  sets: 1
+  reps: 1
+  weight: 1.5
+  notes: MyText
+
+two:
+  workout_id: 1
+  exercisable_id: 1
+  exercisable_type: MyString
+  sets: 1
+  reps: 1
+  weight: 1.5
+  notes: MyText

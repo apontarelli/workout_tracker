@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: workout_tracker_development
+
+test:
+  <<: *default
+  database: workout_tracker_test
+
+production:
+  <<: *default
+  database: workout_tracker_production
+  username: workout_tracker
+  password: <%= ENV['YOUR_APP_NAME_DATABASE_PASSWORD'] %>
