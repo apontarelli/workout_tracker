@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center">
         <%= link_to root_path, class: "text-white font-bold text-xl" do %>
-          Your App Name
+          Workout Tracker
         <% end %>
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-4">
@@ -11,7 +11,10 @@
             <%= link_to "Workouts", workouts_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium #{'bg-gray-900 text-white' if workouts_active?}" %>
             <%= link_to "Programs", programs_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium #{'bg-gray-900 text-white' if programs_active?}" %>
             <%= link_to "Exercises", exercises_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium #{'bg-gray-900 text-white' if exercises_active?}" %>
-          </div>
+            <% if @user %>
+              <%= link_to "User", user_path(@user), class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium #{'bg-gray-900 text-white' if user_active?}" %>
+            <% end %>
+            </div>
         </div>
       </div>
       <div class="-mr-2 flex md:hidden">
@@ -38,6 +41,9 @@
       <%= link_to "Workouts", workouts_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium #{'bg-gray-900 text-white' if workouts_active?}" %>
       <%= link_to "Programs", programs_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium #{'bg-gray-900 text-white' if programs_active?}" %>
       <%= link_to "Exercises", exercises_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium #{'bg-gray-900 text-white' if exercises_active?}" %>
+      <% if @user %>
+        <%= link_to "User", user_path(@user), class: "text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium #{'bg-gray-900 text-white' if user_active?}" %>
+      <% end %>
     </div>
   </div>
 </nav>
