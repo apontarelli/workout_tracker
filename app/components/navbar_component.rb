@@ -4,7 +4,6 @@ class NavbarComponent < ViewComponent::Base
 
   def initialize(user)
     @user = user
-    Rails.logger.debug("NavbarComponent initialized with user: #{@user.inspect}")
   end
 
   def render?

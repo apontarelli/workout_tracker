@@ -34,6 +34,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem "view_component"
 
+gem "rails-ujs"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

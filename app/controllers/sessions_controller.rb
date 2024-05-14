@@ -1,9 +1,10 @@
 class SessionsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:new, :create]
+
   def new
   end
 
   def create
-    Rails.logger.debug("params: #{params.inspect}")
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user

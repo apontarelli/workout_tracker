@@ -1,11 +1,10 @@
 class UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update]
     before_action :correct_user, only: [:edit, :update]
-  
+    skip_before_action :authenticate_user!, only: [:new, :create]
+    
     # GET /users/1
     def show
-        @user = User.find(params[:id])
-        Rails.logger.debug("UsersController Show: #{@user.inspect}")
     end
   
     # GET /signup
@@ -38,8 +37,8 @@ class UsersController < ApplicationController
     end
   
     private
+    
       def set_user
-        Rails.logger.debug("Params ID: #{params[:id]}")
         @user = User.find(params[:id])
       end
   
