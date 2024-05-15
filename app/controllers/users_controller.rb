@@ -3,16 +3,13 @@ class UsersController < ApplicationController
     before_action :correct_user, only: [:edit, :update]
     skip_before_action :authenticate_user!, only: [:new, :create]
     
-    # GET /users/1
     def show
     end
   
-    # GET /signup
     def new
       @user = User.new
     end
   
-    # POST /users
     def create
       @user = User.new(user_params)
       if @user.save
@@ -23,11 +20,9 @@ class UsersController < ApplicationController
       end
     end
   
-    # GET /users/1/edit
     def edit
     end
   
-    # PATCH/PUT /users/1
     def update
       if @user.update(user_params)
         redirect_to @user, notice: 'Profile was successfully updated.'
