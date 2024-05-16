@@ -2,6 +2,7 @@
 require 'spec_helper'
 require 'rails-controller-testing'
 require 'view_component/test_helpers'
+require 'capybara/rspec'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'

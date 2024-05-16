@@ -27,7 +27,6 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         redirect_to @user, notice: 'Profile was successfully updated.'
       else
-        Rails.logger.debug "Failed to update user: #{@user.errors.full_messages}"
         render :edit
       end
     end
@@ -51,4 +50,3 @@ class UsersController < ApplicationController
         end
       end
   end
-  
