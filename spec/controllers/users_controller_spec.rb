@@ -60,21 +60,21 @@ RSpec.describe UsersController, type: :controller do
     before { log_in user }
 
     context 'with valid parameters' do
-      it 'updates the user and redirects to the user page' do
-        patch :update, params: { id: user.id, user: { name: 'John Updated' } }
-        user.reload
-        expect(user.name).to eq('John Updated')
-        expect(response).to redirect_to(user)
-        expect(flash[:notice]).to eq('Profile was successfully updated.')
+        it 'updates the user and redirects to the user page' do
+          patch :update, params: { id: user.id, user: { name: 'John Updated', email: user.email, password: '', password_confirmation: '' } }
+          user.reload
+          expect(user.name).to eq('John Updated')
+          expect(response).to redirect_to(user)
+          expect(flash[:notice]).to eq('Profile was successfully updated.')
+        end
       end
-    end
-
-    context 'with invalid parameters' do
-      it 'does not update the user and re-renders the edit template' do
-        patch :update, params: { id: user.id, user: { name: '' } }
-        expect(response).to render_template(:edit)
+  
+      context 'with invalid parameters' do
+        it 'does not update the user and re-renders the edit template' do
+          patch :update, params: { id: user.id, user: { name: '', email: user.email, password: '', password_confirmation: '' } }
+          expect(response).to render_template(:edit)
+        end
       end
-    end
   end
 
   private

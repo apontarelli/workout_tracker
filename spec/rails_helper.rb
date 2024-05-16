@@ -1,6 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 require 'rails-controller-testing'
+require 'view_component/test_helpers'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -32,12 +33,29 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_paths = [
-    Rails.root.join('spec/fixtures')
-  ]
+  # This line ensures that fixtures are used if needed
+  config.fixture_paths = "#{::Rails.root}/spec/fixtures"
+  # This line sets the default URL host for all specs in the application
+  config.before(:each) do
+    Rails.application.routes.default_url_options[:host] = 'http://test.host'
+  end
+
   # This line is needed to run the tests in headless mode
   Rails::Controller::Testing.install
+
+  # Include ViewComponent test helpers
+  config.include ViewComponent::TestHelpers, type: :component
+
+  # Include URL helpers for path helpers in component specs
+  config.include Rails.application.routes.url_helpers
+
+  # Include Capybara matchers for component specs
+  config.include Capybara::RSpecMatchers, type: :component
+
+  # Additional configuration for system tests
+  config.before(:each, type: :system) do
+    driven_by(:selenium_chrome_headless)
+  end
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

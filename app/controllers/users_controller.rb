@@ -27,6 +27,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         redirect_to @user, notice: 'Profile was successfully updated.'
       else
+        Rails.logger.debug "Failed to update user: #{@user.errors.full_messages}"
         render :edit
       end
     end
@@ -42,7 +43,12 @@ class UsersController < ApplicationController
       end
   
       def user_params
-        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+        params.require(:user).permit(:name, :email).tap do |user_params|
+          if params[:user][:password].present?
+            user_params[:password] = params[:user][:password]
+            user_params[:password_confirmation] = params[:user][:password_confirmation]
+          end
+        end
       end
   end
   
