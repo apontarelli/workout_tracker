@@ -1,0 +1,36 @@
+exercises:
+  - name: "Barbell Squat"
+    primary_muscle_group: "Legs"
+    secondary_muscle_groups: ["Glutes", "Lower Back"]
+    equipment: "Barbell"
+    exercise_group: "Squat"
+  - name: "Air Squat"
+    primary_muscle_group: "Legs"
+    secondary_muscle_groups: ["Glutes"]
+    equipment: "None"
+    exercise_group: "Squat"
+  - name: "Dumbbell Squat"
+    primary_muscle_group: "Legs"
+    secondary_muscle_groups: ["Glutes", "Lower Back"]
+    equipment: "Dumbbells"
+    exercise_group: "Squat"
+  - name: "Barbell Bench Press"
+    primary_muscle_group: "Chest"
+    secondary_muscle_groups: ["Triceps", "Shoulders"]
+    equipment: "Barbell"
+    exercise_group: "Press"
+  - name: "Barbell Shoulder Press"
+    primary_muscle_group: "Shoulders"
+    secondary_muscle_groups: ["Triceps"]
+    equipment: "Barbell"
+    exercise_group: "Press"
+  - name: "Barbell Deadlift"
+    primary_muscle_group: "Back"
+    secondary_muscle_groups: ["Glutes", "Hamstrings"]
+    equipment: "Barbell"
+    exercise_group: "Deadlift"
+  - name: "Barbell Row"
+    primary_muscle_group: "Back"
+    secondary_muscle_groups: ["Biceps"]
+    equipment: "Barbell"
+    exercise_group: "Row"
