@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   # Resourceful routes
-  resources :workouts, only: [:index, :show, :new, :create]
+  resources :workouts
   resources :programs, only: [:index, :show, :new, :create]
   resources :exercises, only: [:index, :show] do
     resources :user_exercises, only: [:new, :create]
