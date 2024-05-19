@@ -36,7 +36,8 @@
 /config/master.key
 
 # Ignore all todo lists
-/todo/*
 /app/assets/builds/*
 !/app/assets/builds/.keep
 yarn-error.log
+# Ignore system created files
+.DS_Store
