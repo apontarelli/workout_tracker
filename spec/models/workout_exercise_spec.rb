@@ -1,10 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe WorkoutExercise, type: :model do
-  subject { 
+  let(:user) { User.new(name: "John Doe", email: "john.doe@example.com", password: "password") }
+  let(:workout) { Workout.new(user: user) }
+  let(:exercise) { Exercise.new(name: "Push Up") }
+
+  subject {
     described_class.new(
-      workout: Workout.new(user: User.new(name: "John Doe", email: "john.doe@example.com", password: "password")),
-      exercisable: Exercise.new(name: "Push Up")
+      workout: workout,
+      exercisable: exercise,
+      combined_exercise_id: "Exercise-#{exercise.id}"
     )
   }
 
@@ -33,5 +38,30 @@ RSpec.describe WorkoutExercise, type: :model do
     assoc = described_class.reflect_on_association(:exercisable)
     expect(assoc.macro).to eq :belongs_to
     expect(assoc.options[:polymorphic]).to be true
+  end
+
+  it 'has many workout sets' do
+    assoc = described_class.reflect_on_association(:workout_sets)
+    expect(assoc.macro).to eq :has_many
+  end
+
+  it 'accepts nested attributes for workout sets' do
+    expect(described_class.nested_attributes_options).to include(:workout_sets)
+  end
+
+  it 'sets exercisable based on combined_exercise_id before validation' do
+    subject.combined_exercise_id = "Exercise-#{exercise.id}"
+    subject.valid?
+    expect(subject.exercisable_type).to eq 'Exercise'
+    expect(subject.exercisable_id).to eq exercise.id
+  end
+
+  it 'calls set_exercisable before validation' do
+    workout_exercise = described_class.new(
+      workout: workout,
+      combined_exercise_id: "Exercise-#{exercise.id}"
+    )
+    expect(workout_exercise).to receive(:set_exercisable)
+    workout_exercise.valid?
   end
 end
