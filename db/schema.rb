@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_17_065104) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_21_145026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,20 +25,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_17_065104) do
     t.string "exercise_group"
   end
 
-  create_table "programs", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "template_exercises", force: :cascade do |t|
-    t.integer "workout_template_id"
+  create_table "program_exercises", force: :cascade do |t|
+    t.integer "program_workout_id"
     t.integer "exercisable_id"
     t.string "exercisable_type"
     t.integer "sets"
     t.integer "reps"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "program_workouts", force: :cascade do |t|
+    t.integer "program_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "programs", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -63,20 +70,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_17_065104) do
     t.integer "workout_id"
     t.integer "exercisable_id"
     t.string "exercisable_type"
-    t.integer "sets"
-    t.integer "reps"
-    t.float "weight"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "workout_templates", force: :cascade do |t|
-    t.integer "program_id"
-    t.integer "user_id"
-    t.string "name"
+  create_table "workout_sets", force: :cascade do |t|
+    t.bigint "workout_exercise_id", null: false
+    t.integer "reps"
+    t.decimal "weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["workout_exercise_id"], name: "index_workout_sets_on_workout_exercise_id"
   end
 
   create_table "workouts", force: :cascade do |t|
@@ -88,4 +93,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_17_065104) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "workout_sets", "workout_exercises"
 end
