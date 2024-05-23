@@ -21,6 +21,7 @@ RSpec.describe Workout, type: :model do
   subject { 
     described_class.new(
       user: user,
+      name: "Workout 1",
       current_user: user
     )
   }

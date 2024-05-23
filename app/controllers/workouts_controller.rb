@@ -26,7 +26,7 @@ class WorkoutsController < ApplicationController
     if @workout.update(workout_params)
       redirect_to edit_workout_path(@workout), notice: 'Workout was successfully updated.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

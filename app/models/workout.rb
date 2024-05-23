@@ -3,6 +3,8 @@ class Workout < ApplicationRecord
     belongs_to :program, optional: true
     has_many :workout_exercises
 
+    validates :name, presence: true
+
     accepts_nested_attributes_for :workout_exercises, allow_destroy: true
 
     before_save :set_user_id
