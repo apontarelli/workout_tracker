@@ -3,6 +3,7 @@ require 'spec_helper'
 require 'rails-controller-testing'
 require 'view_component/test_helpers'
 require 'capybara/rspec'
+require 'rake'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -10,6 +11,9 @@ require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+
+#Ensure rake tasks are loaded
+Rails.application.load_tasks
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -34,6 +38,12 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  config.before(:suite) do
+    Rake::Task['assets:clobber'].invoke
+    Rake::Task['assets:precompile'].invoke
+    puts "Public file server enabled: #{Rails.application.config.public_file_server.enabled}"
+    puts "Public file server headers: #{Rails.application.config.public_file_server.headers}"
+  end
   # This line ensures that fixtures are used if needed
   config.fixture_paths = "#{::Rails.root}/spec/fixtures"
   # This line sets the default URL host for all specs in the application

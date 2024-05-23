@@ -18,6 +18,8 @@ module WorkoutTracker
 
     # Add Propshaft configuration
     config.assets.paths << Rails.root.join("app", "assets", "images")
+    config.assets.paths << Rails.root.join("app", "assets", "stylesheets")
+    config.assets.paths << Rails.root.join("app", "assets", "javascript")
 
     # Configuration for the application, engines, and railties goes here.
     #
