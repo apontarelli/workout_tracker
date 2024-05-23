@@ -1,0 +1,51 @@
+<h1>New User Exercise</h1>
+
+<%= form_with(model: @user_exercise, url: create_user_exercise_exercises_path, local: true) do |form| %>
+  <% if @user_exercise.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_exercise.errors.count, "error") %> prohibited this exercise from being saved:</h2>
+
+      <ul>
+        <% @user_exercise.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :instructions %>
+    <%= form.text_area :instructions %>
+  </div>
+
+  <div class="field">
+    <%= form.label :primary_muscle_group %>
+    <%= form.text_field :primary_muscle_group %>
+  </div>
+
+  <div class="field">
+    <%= form.label :equipment %>
+    <%= form.text_field :equipment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :exercise_group %>
+    <%= form.text_field :exercise_group %>
+  </div>
+
+  <div class="field">
+    <%= form.label :secondary_muscle_groups %>
+    <%= form.text_field :secondary_muscle_groups %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', exercises_path %>

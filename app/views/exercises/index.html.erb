@@ -2,6 +2,15 @@
 
 <ul>
   <% @combined_exercises.each do |name, combined_id| %>
-    <li><%= name %> (ID: <%= combined_id %>)</li>
+    <li>
+    <%= name %> (ID: <%= combined_id %>)
+    <% if combined_id.start_with?("UserExercise-") %>
+      <% user_exercise_id = combined_id.split("-").last %>
+      <%= link_to 'Edit', edit_user_exercise_path(user_exercise_id) %>
+      <%= link_to 'Destroy', destroy_user_exercise_path(user_exercise_id), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </li>
   <% end %>
 </ul>
+
+<%= link_to 'New User Exercise', new_user_exercise_exercises_path %>

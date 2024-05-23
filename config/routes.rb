@@ -9,9 +9,22 @@ Rails.application.routes.draw do
   # Resourceful routes
   resources :workouts
   resources :programs, only: [:index, :show, :new, :create]
+
   resources :exercises, only: [:index, :show] do
-    resources :user_exercises, only: [:new, :create]
+    collection do
+      get 'new_user_exercise', to: 'exercises#new_user_exercise'
+      post 'create_user_exercise', to: 'exercises#create_user_exercise'
+    end
   end
+  
+  resources :user_exercises, only: [] do
+    member do
+      get 'edit', to: 'exercises#edit_user_exercise'
+      patch 'update', to: 'exercises#update_user_exercise'
+      delete '', to: 'exercises#destroy_user_exercise', as: 'destroy'
+    end
+  end
+
   resources :users, only: [:show, :create, :edit, :update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
