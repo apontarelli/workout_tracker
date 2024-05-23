@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe WorkoutSet, type: :model do
   let(:user) { User.create!(name: "John Doe", email: "john.doe@example.com", password: "password") }
-  let(:workout) { Workout.create!(user: user) }
+  let(:workout) { Workout.create!(user: user, name: "Morning Workout") }
   let(:exercise) { Exercise.create!(name: "Push Up") }
   let(:workout_exercise) { WorkoutExercise.create!(workout: workout, exercisable: exercise) }
 
