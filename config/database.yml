@@ -2,21 +2,23 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-development:
-  <<: *default
-  database: <%= ENV['DATABASE_NAME'] %>
-  username: <%= ENV['DATABASE_USERNAME'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV['DATABASE_HOST'] %>
   port: <%= ENV['DATABASE_PORT'] %>
 
+development:
+  <<: *default
+  database: <%= ENV['DATABASE_NAME_DEVELOPMENT'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+
 test:
   <<: *default
-  database: workout_tracker_test
+  database: <%= ENV['DATABASE_NAME_TEST'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
 
 production:
   <<: *default
-  database: workout_tracker_production
-  username: workout_tracker
-  password: <%= ENV['YOUR_APP_NAME_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_NAME_PRODUCTION'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
