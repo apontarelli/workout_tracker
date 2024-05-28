@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_23_050409) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_28_042851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,34 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_050409) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "template_exercises", force: :cascade do |t|
+    t.bigint "template_workout_id", null: false
+    t.integer "exercisable_id"
+    t.string "exercisable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["template_workout_id"], name: "index_template_exercises_on_template_workout_id"
+  end
+
+  create_table "template_sets", force: :cascade do |t|
+    t.bigint "template_exercise_id", null: false
+    t.integer "reps"
+    t.decimal "weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["template_exercise_id"], name: "index_template_sets_on_template_exercise_id"
+  end
+
+  create_table "template_workouts", force: :cascade do |t|
+    t.string "name"
+    t.bigint "program_id"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["program_id"], name: "index_template_workouts_on_program_id"
+    t.index ["user_id"], name: "index_template_workouts_on_user_id"
   end
 
   create_table "user_exercises", force: :cascade do |t|
@@ -97,5 +125,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_050409) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "template_exercises", "template_workouts"
+  add_foreign_key "template_sets", "template_exercises"
+  add_foreign_key "template_workouts", "programs"
+  add_foreign_key "template_workouts", "users"
   add_foreign_key "workout_sets", "workout_exercises"
 end

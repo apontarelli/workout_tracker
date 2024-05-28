@@ -1,5 +1,5 @@
 class Program < ApplicationRecord
   # Associations
   belongs_to :user
-  has_many :workout_templates, dependent: :destroy
+  has_many :template_workouts, dependent: :destroy
 end

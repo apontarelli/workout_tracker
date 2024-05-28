@@ -9,7 +9,7 @@ class Workout < ApplicationRecord
 
   # Validations
   validates :name, presence: true
-
+### Below should be deleted and fixed in controller
   # Callbacks
   before_save :set_user_id
 
