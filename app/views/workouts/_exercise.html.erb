@@ -17,39 +17,12 @@
   <div class="sets mb-4" data-controller="fields">
     <div data-fields-target="container">
       <%= f.fields_for :workout_sets do |s| %>
-        <div class="set mb-2 nested-fields">
-          <%= s.hidden_field :_destroy %>
-          <div class="mb-2">
-            <%= s.label :reps, "Reps", class: "block text-gray-700 text-sm font-bold mb-1" %>
-            <%= s.number_field :reps, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
-          </div>
-
-          <div class="mb-2">
-            <%= s.label :weight, "Weight", class: "block text-gray-700 text-sm font-bold mb-1" %>
-            <%= s.number_field :weight, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
-          </div>
-
-          <%= link_to "Remove Set", "#", class: "remove_fields text-red-500", data: { action: "click->fields#removeAssociation" } %>
-        </div>
+        <%= render 'exercise_set', s: s %>
       <% end %>
     </div>
     <template data-fields-target="template" style="display: none;">
-      <div class="set mb-2 nested-fields">
-        <%= f.fields_for :workout_sets, WorkoutSet.new, child_index: "NEW_RECORD" do |s| %>
-          <%= s.hidden_field :_destroy %>
-          <div class="mb-2">
-            <%= s.label :reps, "Reps", class: "block text-gray-700 text-sm font-bold mb-1" %>
-            <%= s.number_field :reps, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
-          </div>
-
-          <div class="mb-2">
-            <%= s.label :weight, "Weight", class: "block text-gray-700 text-sm font-bold mb-1" %>
-            <%= s.number_field :weight, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
-          </div>
-
-          <%= link_to "Remove Set", "#", class: "remove_fields text-red-500", data: { action: "click->fields#removeAssociation" } %>
-        </div>
-      </div>
+      <%= f.fields_for :workout_sets, WorkoutSet.new, child_index: "NEW_RECORD" do |s| %>
+        <%= render 'exercise_set', s: s %>
     </template>
     <%= link_to "Add Set", "#", class: "add_fields text-blue-500", data: { action: "click->fields#addAssociation" } %>
   </div>
