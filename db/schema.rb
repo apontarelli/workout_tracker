@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_28_042851) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_28_065819) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,29 +25,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_042851) do
     t.string "exercise_group"
   end
 
-  create_table "program_exercises", force: :cascade do |t|
-    t.integer "program_workout_id"
-    t.integer "exercisable_id"
-    t.string "exercisable_type"
-    t.integer "sets"
-    t.integer "reps"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "program_workouts", force: :cascade do |t|
-    t.integer "program_id"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "programs", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_programs_on_user_id"
   end
 
   create_table "template_exercises", force: :cascade do |t|
@@ -79,7 +63,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_042851) do
   end
 
   create_table "user_exercises", force: :cascade do |t|
-    t.integer "user_id"
     t.string "name"
     t.text "instructions"
     t.datetime "created_at", null: false
@@ -88,6 +71,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_042851) do
     t.string "equipment"
     t.string "exercise_group"
     t.string "secondary_muscle_groups", default: [], array: true
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_user_exercises_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -99,12 +84,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_042851) do
   end
 
   create_table "workout_exercises", force: :cascade do |t|
-    t.integer "workout_id"
     t.integer "exercisable_id"
     t.string "exercisable_type"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "workout_id", null: false
+    t.index ["workout_id"], name: "index_workout_exercises_on_workout_id"
   end
 
   create_table "workout_sets", force: :cascade do |t|
@@ -119,15 +105,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_042851) do
   create_table "workouts", force: :cascade do |t|
     t.date "date"
     t.string "name"
-    t.integer "program_id"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "program_id"
+    t.index ["program_id"], name: "index_workouts_on_program_id"
+    t.index ["user_id"], name: "index_workouts_on_user_id"
   end
 
+  add_foreign_key "programs", "users"
   add_foreign_key "template_exercises", "template_workouts"
   add_foreign_key "template_sets", "template_exercises"
   add_foreign_key "template_workouts", "programs"
   add_foreign_key "template_workouts", "users"
+  add_foreign_key "user_exercises", "users"
+  add_foreign_key "workout_exercises", "workouts"
   add_foreign_key "workout_sets", "workout_exercises"
+  add_foreign_key "workouts", "programs"
+  add_foreign_key "workouts", "users"
 end
