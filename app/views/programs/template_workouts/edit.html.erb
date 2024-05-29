@@ -1,0 +1,5 @@
+<h1>Edit Program Workout</h1>
+
+<%= render 'programs/template_workouts/form', template_workout: @template_workout, template_exercises: @template_exercises %>
+
+<%= link_to 'Back', edit_program_path(@program), class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>

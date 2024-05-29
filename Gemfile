@@ -27,6 +27,8 @@ gem "cssbundling-rails"
 
 gem 'dotenv-rails', groups: [:development, :test]
 
+gem 'pry-rails', group: [:development, :test]
+
 gem 'bcrypt', '~> 3.1.7'
 
 gem "view_component"

@@ -1,0 +1,33 @@
+<div class="nested-fields mb-4 p-4 bg-white shadow rounded">
+  <div class="mb-4">
+    <%= f.label :combined_exercise_id, "Exercise", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= f.select :combined_exercise_id, options_for_select(combined_exercises, "#{f.object.exercisable_type}-#{f.object.exercisable_id}"), {}, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="exercise-details mb-4">
+    <% if f.object.exercisable %>
+      <p><strong>Instructions:</strong> <%= f.object.exercisable.instructions %></p>
+      <p><strong>Primary Muscle Group:</strong> <%= f.object.exercisable.primary_muscle_group %></p>
+      <p><strong>Secondary Muscle Groups:</strong> <%= f.object.exercisable.secondary_muscle_groups %></p>
+      <p><strong>Equipment:</strong> <%= f.object.exercisable.equipment %></p>
+      <p><strong>Exercise Group:</strong> <%= f.object.exercisable.exercise_group %></p>
+    <% end %>
+  </div>
+
+  <div class="sets mb-4" data-controller="fields">
+    <div data-fields-target="container">
+      <%= f.fields_for :template_sets do |s| %>
+        <%= render 'programs/template_workouts/exercise_set', s: s %>
+      <% end %>
+    </div>
+    <template data-fields-target="template" style="display: none;">
+      <%= f.fields_for :template_sets, TemplateSet.new, child_index: "NEW_RECORD" do |s| %>
+        <%= render 'programs/template_workouts/exercise_set', s: s %>
+    </template>
+    <%= link_to "Add Set", "#", class: "add_fields text-blue-500", data: { action: "click->fields#addAssociation" } %>
+  </div>
+
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "Remove Exercise", "#", class: "remove_fields text-red-500", data: { action: "click->fields#removeAssociation" } %>
+</div>
+<% end %>

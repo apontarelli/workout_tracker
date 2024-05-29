@@ -1,0 +1,35 @@
+<%= form_with(model: [@program, @template_workout], local: true) do |form| %>
+  <% if @template_workout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@template_workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
+      <ul>
+        <% @template_workout.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field space-y-1">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div data-controller="fields">
+    <div class="fields" data-fields-target="container">
+      <%= form.fields_for :template_exercises do |exercise_form| %>
+        <%= render 'programs/template_workouts/exercise', f: exercise_form, combined_exercises: @combined_exercises %>
+      <% end %>
+    </div>
+    <template data-fields-target="template" style="display: none;">
+      <%= form.fields_for :template_exercises, TemplateExercise.new do |exercise_form| %>
+        <%= render 'programs/template_workouts/exercise', f: exercise_form, combined_exercises: @combined_exercises %>
+      <% end %>
+    </template>
+    <%= link_to "Add Exercise", "#", class: "add_fields text-blue-500", data: { action: "click->fields#addAssociation" } %>
+  </div>
+
+  <div class="actions space-y-1">
+    <%= form.submit class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+  </div>
+<% end %>

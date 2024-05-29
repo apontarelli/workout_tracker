@@ -1,0 +1,39 @@
+<%= form_with(model: @program, local: true) do |form| %>
+  <div class="field space-y-1">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field space-y-1">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Save Program", class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+  </div>
+<% end %>
+
+<h2>Program Workouts</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @template_workouts.each do |template_workout| %>
+      <tr>
+        <td><%= template_workout.name %></td>
+        <td>
+          <%= link_to 'Edit', edit_program_template_workout_path(@program, template_workout), class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+          <%= link_to 'Destroy', program_template_workout_path(@program, template_workout), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Add Program Workout', program_template_workouts_path(@program), method: :post, params: { template_workout: { name: 'New Program Workout' } }, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>

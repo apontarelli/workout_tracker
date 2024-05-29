@@ -1,4 +1,23 @@
-<div>
-  <h1 class="font-bold text-4xl">Programs#index</h1>
-  <p>Find me in app/views/programs/index.html.erb</p>
-</div>
+<h1>Programs</h1>
+
+<%= link_to 'New Program', programs_path, method: :post, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @programs.each do |program| %>
+      <tr>
+        <td><%= program.name %></td>
+        <td>
+          <%= link_to 'Edit', edit_program_path(program), class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+          <%= link_to 'Destroy', program_path(program), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

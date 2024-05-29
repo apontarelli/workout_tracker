@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   # Resourceful routes
   resources :workouts
-  resources :programs, only: [:index, :show, :new, :create]
+  resources :programs do
+    resources :template_workouts, only: [:create, :edit, :update, :destroy]
+  end
 
   resources :exercises, only: [:index, :show] do
     collection do
