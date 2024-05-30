@@ -18,8 +18,8 @@ RSpec.describe Program, type: :model do
     expect(subject.errors[:user]).to include("must exist")
   end
 
-  it 'can have many workout templates' do
-    assoc = described_class.reflect_on_association(:workout_templates)
+  it 'can have many template workouts' do
+    assoc = described_class.reflect_on_association(:template_workouts)
     expect(assoc.macro).to eq :has_many
   end
 end

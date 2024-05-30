@@ -4,6 +4,7 @@ require 'rails-controller-testing'
 require 'view_component/test_helpers'
 require 'capybara/rspec'
 require 'rake'
+require 'factory_bot_rails'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -44,6 +45,8 @@ RSpec.configure do |config|
     puts "Public file server enabled: #{Rails.application.config.public_file_server.enabled}"
     puts "Public file server headers: #{Rails.application.config.public_file_server.headers}"
   end
+
+  config.include FactoryBot::Syntax::Methods
   # This line ensures that fixtures are used if needed
   config.fixture_paths = "#{::Rails.root}/spec/fixtures"
   # This line sets the default URL host for all specs in the application
