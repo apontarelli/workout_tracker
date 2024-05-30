@@ -39,12 +39,19 @@ class WorkoutsController < ApplicationController
   private
 
   def workout_params
-    params.require(:workout).permit(:name, :date, :program_id,
-                                    workout_exercises_attributes: [:id, :exercise_id, :combined_exercise_id, :notes, :_destroy, { workout_sets_attributes: %i[id reps weight _destroy] }]).tap do |whitelisted|
+    params.require(:workout).permit(
+      :name, :date, :program_id,
+      workout_exercises_attributes: [
+        :id, :exercise_id, :combined_exercise_id, :notes, :_destroy,
+        {
+          workout_sets_attributes: %i[id reps weight _destroy]
+        }
+      ]
+    ).tap do |whitelisted|
       if whitelisted[:workout_exercises_attributes]
         whitelisted[:workout_exercises_attributes].each do |_key, exercise|
           next unless exercise[:combined_exercise_id]
-
+  
           type, id = exercise[:combined_exercise_id].split('-')
           exercise[:exercisable_type] = type
           exercise[:exercisable_id] = id
@@ -53,6 +60,7 @@ class WorkoutsController < ApplicationController
       end
     end
   end
+  
 
   def workout_params_with_defaults
     {

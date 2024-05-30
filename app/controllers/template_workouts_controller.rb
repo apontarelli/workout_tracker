@@ -50,14 +50,19 @@ class TemplateWorkoutsController < ApplicationController
   end
 
   def template_workout_params
-    params.require(:template_workout).permit(:name, template_exercises_attributes: [
-                                               :id, :exercise_id, :combined_exercise_id, :notes, :_destroy,
-                                               { template_sets_attributes: %i[id reps weight _destroy exercise_entry_id exercise_entry_type] }
-                                             ]).tap do |whitelisted|
+    params.require(:template_workout).permit(
+      :name,
+      template_exercises_attributes: [
+        :id, :exercise_id, :combined_exercise_id, :notes, :_destroy,
+        {
+          template_sets_attributes: %i[id reps weight _destroy exercise_entry_id exercise_entry_type]
+        }
+      ]
+    ).tap do |whitelisted|
       if whitelisted[:template_exercises_attributes]
         whitelisted[:template_exercises_attributes].each do |_key, exercise|
           next unless exercise[:combined_exercise_id]
-
+  
           type, id = exercise[:combined_exercise_id].split('-')
           exercise[:exercisable_type] = type
           exercise[:exercisable_id] = id
@@ -66,6 +71,7 @@ class TemplateWorkoutsController < ApplicationController
       end
     end
   end
+  
 
   def template_workout_params_with_defaults
     {

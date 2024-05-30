@@ -55,15 +55,29 @@ RSpec.describe ExercisesController, type: :controller do
       it 'creates a new UserExercise' do
         expect do
           post :create_user_exercise,
-               params: { user_exercise: { name: 'Squat', primary_muscle_group: 'Legs', secondary_muscle_groups: ['Glutes'],
-                                          equipment: 'None', exercise_group: 'Strength' } }
+              params: {
+                user_exercise: {
+                  name: 'Squat',
+                  primary_muscle_group: 'Legs',
+                  secondary_muscle_groups: ['Glutes'],
+                  equipment: 'None',
+                  exercise_group: 'Strength'
+                }
+              }
         end.to change(UserExercise, :count).by(1)
       end
 
       it 'redirects to the exercises list' do
         post :create_user_exercise,
-             params: { user_exercise: { name: 'Squat', primary_muscle_group: 'Legs', secondary_muscle_groups: ['Glutes'],
-                                        equipment: 'None', exercise_group: 'Strength' } }
+            params: {
+              user_exercise: {
+                name: 'Squat',
+                primary_muscle_group: 'Legs',
+                secondary_muscle_groups: ['Glutes'],
+                equipment: 'None',
+                exercise_group: 'Strength'
+              }
+            }
         expect(response).to redirect_to(exercises_path)
       end
     end
@@ -71,8 +85,15 @@ RSpec.describe ExercisesController, type: :controller do
     context 'with invalid params' do
       it 'renders the new template' do
         post :create_user_exercise,
-             params: { user_exercise: { name: '', primary_muscle_group: 'Legs', secondary_muscle_groups: ['Glutes'],
-                                        equipment: 'None', exercise_group: 'Strength' } }
+            params: {
+              user_exercise: {
+                name: 'Squat',
+                primary_muscle_group: 'Legs',
+                secondary_muscle_groups: ['Glutes'],
+                equipment: 'None',
+                exercise_group: 'Strength'
+              }
+            }
         expect(response).to render_template(:new_user_exercise)
       end
     end
@@ -88,13 +109,23 @@ RSpec.describe ExercisesController, type: :controller do
   describe 'PATCH #update_user_exercise' do
     context 'with valid params' do
       it 'updates the requested user exercise' do
-        patch :update_user_exercise, params: { id: user_exercise.to_param, user_exercise: { name: 'Updated Exercise' } }
+        patch :update_user_exercise, params: {
+          id: user_exercise.to_param,
+          user_exercise: {
+            name: 'Updated Exercise'
+          }
+        }
         user_exercise.reload
         expect(user_exercise.name).to eq('Updated Exercise')
       end
 
       it 'redirects to the exercises list' do
-        patch :update_user_exercise, params: { id: user_exercise.to_param, user_exercise: { name: 'Updated Exercise' } }
+        patch :update_user_exercise, params: {
+          id: user_exercise.to_param,
+          user_exercise: {
+            name: 'Updated Exercise'
+          }
+        }
         expect(response).to redirect_to(exercises_path)
       end
     end
