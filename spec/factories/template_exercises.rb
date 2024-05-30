@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :template_exercise do
-    association :template_workout
+    template_workout
 
     after(:build) do |template_exercise|
       exercise = create(:exercise)
@@ -9,7 +9,7 @@ FactoryBot.define do
     end
 
     after(:create) do |template_exercise|
-      create_list(:template_set, 3, template_exercise: template_exercise)
+      create_list(:template_set, 3, template_exercise:)
     end
   end
 end

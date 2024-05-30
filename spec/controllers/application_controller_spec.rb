@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ApplicationController, type: :controller do
   controller do
     def index
-      render plain: "Success"
+      render plain: 'Success'
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe ApplicationController, type: :controller do
     it 'allows access to the action' do
       get :index
       expect(response).to be_successful
-      expect(response.body).to eq("Success")
+      expect(response.body).to eq('Success')
     end
   end
 end

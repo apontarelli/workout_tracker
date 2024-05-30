@@ -1,11 +1,10 @@
 require 'yaml'
 
 begin
-
   ActiveRecord::Base.connection
   if ActiveRecord::Base.connection.table_exists?('exercises')
     Rails.application.config.after_initialize do
-      exercise_file = Rails.root.join('config', 'exercises.yml')
+      exercise_file = Rails.root.join('config/exercises.yml')
       exercises = YAML.load_file(exercise_file)['exercises']
 
       exercises.each do |exercise_data|
@@ -19,5 +18,5 @@ begin
     end
   end
 rescue ActiveRecord::NoDatabaseError, PG::ConnectionBad
-  puts "No database connection found. Skipping load of exercises."
+  puts 'No database connection found. Skipping load of exercises.'
 end

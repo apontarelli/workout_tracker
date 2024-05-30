@@ -9,11 +9,11 @@ require 'factory_bot_rails'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
-#Ensure rake tasks are loaded
+# Ensure rake tasks are loaded
 Rails.application.load_tasks
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -48,9 +48,9 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   # This line ensures that fixtures are used if needed
-  config.fixture_paths = "#{::Rails.root}/spec/fixtures"
+  config.fixture_paths = Rails.root.join('spec/fixtures').to_s
   # This line sets the default URL host for all specs in the application
-  config.before(:each) do
+  config.before do
     Rails.application.routes.default_url_options[:host] = 'http://test.host'
   end
 

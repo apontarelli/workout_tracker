@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ProgramsController, type: :controller do
   let(:user) { create(:user) }
-  let(:program) { create(:program, user: user) }
+  let(:program) { create(:program, user:) }
 
   before do
     # Manually sign in the user
@@ -19,9 +19,9 @@ RSpec.describe ProgramsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new program' do
-        expect {
+        expect do
           post :create, params: { program: attributes_for(:program) }
-        }.to change(user.programs, :count).by(1)
+        end.to change(user.programs, :count).by(1)
       end
 
       it 'redirects to the edit program path' do
@@ -61,9 +61,9 @@ RSpec.describe ProgramsController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroys the requested program' do
       program # create the program
-      expect {
+      expect do
         delete :destroy, params: { id: program.id }
-      }.to change(user.programs, :count).by(-1)
+      end.to change(user.programs, :count).by(-1)
     end
 
     it 'redirects to the programs list' do

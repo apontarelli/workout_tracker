@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe TemplateExercise, type: :model do
-  let(:user) { User.create!(name: "John Doe", email: "john.doe@example.com", password: "password") }
-  let(:template_workout) { TemplateWorkout.create!(user: user, name: "Workout 1") }
-  let(:exercise) { Exercise.create!(name: "Push Up") }
+  let(:user) { User.create!(name: 'John Doe', email: 'john.doe@example.com', password: 'password') }
+  let(:template_workout) { TemplateWorkout.create!(user:, name: 'Workout 1') }
+  let(:exercise) { Exercise.create!(name: 'Push Up') }
 
-  subject {
+  subject do
     described_class.new(
-      template_workout: template_workout,
+      template_workout:,
       exercisable: exercise,
       combined_exercise_id: "Exercise-#{exercise.id}"
     )
-  }
+  end
 
   it 'is valid with valid attributes' do
     expect(subject).to be_valid
@@ -20,14 +20,14 @@ RSpec.describe TemplateExercise, type: :model do
   it 'is invalid without a template_workout' do
     subject.template_workout = nil
     expect(subject).not_to be_valid
-    expect(subject.errors[:template_workout]).to include("must exist")
+    expect(subject.errors[:template_workout]).to include('must exist')
   end
 
   it 'is invalid without an exercisable' do
     subject.exercisable = nil
     subject.combined_exercise_id = nil
     expect(subject).not_to be_valid
-    expect(subject.errors[:exercisable]).to include("must exist")
+    expect(subject.errors[:exercisable]).to include('must exist')
   end
 
   it 'belongs to a template workout' do

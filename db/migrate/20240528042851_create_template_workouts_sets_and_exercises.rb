@@ -3,7 +3,7 @@ class CreateTemplateWorkoutsSetsAndExercises < ActiveRecord::Migration[7.1]
     create_table :template_workouts do |t|
       t.string :name
       t.references :program, null: true, foreign_key: true
-      t.references :user, null:false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

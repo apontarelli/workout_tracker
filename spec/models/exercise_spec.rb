@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Exercise, type: :model do
-  subject { 
+  subject do
     described_class.new(
-      name: "Test exercise",
-      primary_muscle_group: "Chest",
-      secondary_muscle_groups: ["Triceps", "Shoulders"],
-      equipment: "None",
-      exercise_group: "Push"
+      name: 'Test exercise',
+      primary_muscle_group: 'Chest',
+      secondary_muscle_groups: %w[Triceps Shoulders],
+      equipment: 'None',
+      exercise_group: 'Push'
     )
-  }
+  end
 
   context 'validations' do
     it 'is valid with valid attributes' do
@@ -18,18 +18,18 @@ RSpec.describe Exercise, type: :model do
 
     it 'is not valid without a name' do
       subject.name = nil
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
     end
 
     it 'is not valid with a duplicate name' do
       described_class.create!(
-        name: "Test exercise",
-        primary_muscle_group: "Chest",
-        secondary_muscle_groups: ["Triceps", "Shoulders"],
-        equipment: "None",
-        exercise_group: "Push"
+        name: 'Test exercise',
+        primary_muscle_group: 'Chest',
+        secondary_muscle_groups: %w[Triceps Shoulders],
+        equipment: 'None',
+        exercise_group: 'Push'
       )
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
     end
   end
 

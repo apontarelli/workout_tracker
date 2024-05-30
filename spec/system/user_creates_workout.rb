@@ -4,15 +4,15 @@
 # RSpec.describe "Workouts", type: :system do
 #   before do
 #     driven_by(:rack_test)
-    
+
 #     # Create a user and log in
 #     @user = FactoryBot.create(:user, password: 'password')
-    
+
 #     visit login_path
 #     fill_in 'Email', with: @user.email
 #     fill_in 'Password', with: 'password'
 #     click_button 'Log in'
-    
+
 #     # Ensure exercises are loaded
 #     @squat = Exercise.find_by(name: 'Barbell Squat')
 #     @bench_press = Exercise.find_by(name: 'Barbell Bench Press')
@@ -34,7 +34,7 @@
 
 #     # Debugging step
 #     save_and_open_page
-    
+
 #     fill_in 'workout_workout_exercises_attributes_0_workout_sets_attributes_0_reps', with: 10
 #     fill_in 'workout_workout_exercises_attributes_0_workout_sets_attributes_0_weight', with: 100
 #     click_link 'Add Set'

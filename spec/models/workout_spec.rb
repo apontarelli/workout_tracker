@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Workout, type: :model do
-  let(:user) { User.create(name: "John Doe", email: "john.doe@example.com", password: "password") }
-  let(:program) { Program.create(user: user, name: "Program 1") }
-  let(:exercise) { Exercise.create(name: "Push Up") }
+  let(:user) { User.create(name: 'John Doe', email: 'john.doe@example.com', password: 'password') }
+  let(:program) { Program.create(user:, name: 'Program 1') }
+  let(:exercise) { Exercise.create(name: 'Push Up') }
 
   before do
     # Define a dummy current_user method in the Workout model for testing purposes
@@ -12,19 +12,17 @@ RSpec.describe Workout, type: :model do
 
       before_save :set_user_id
 
-      def current_user
-        @current_user
-      end
+      attr_reader :current_user
     end
   end
 
-  subject { 
+  subject do
     described_class.new(
-      user: user,
-      name: "Workout 1",
+      user:,
+      name: 'Workout 1',
       current_user: user
     )
-  }
+  end
 
   it 'is valid with valid attributes' do
     expect(subject).to be_valid
@@ -33,7 +31,7 @@ RSpec.describe Workout, type: :model do
   it 'is invalid without a user' do
     subject.user = nil
     expect(subject).not_to be_valid
-    expect(subject.errors[:user]).to include("must exist")
+    expect(subject.errors[:user]).to include('must exist')
   end
 
   it 'can belong to a program' do

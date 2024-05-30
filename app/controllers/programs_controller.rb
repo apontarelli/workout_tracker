@@ -1,8 +1,12 @@
 class ProgramsController < ApplicationController
-  before_action :set_program, only: [:edit, :update, :destroy]
+  before_action :set_program, only: %i[edit update destroy]
 
   def index
     @programs = current_user.programs
+  end
+
+  def edit
+    @template_workouts = @program.template_workouts
   end
 
   def create
@@ -12,10 +16,6 @@ class ProgramsController < ApplicationController
     else
       render :index, status: :unprocessable_entity
     end
-  end
-
-  def edit
-    @template_workouts = @program.template_workouts
   end
 
   def update
@@ -32,20 +32,20 @@ class ProgramsController < ApplicationController
     @program.destroy
     redirect_to programs_url, notice: 'Program was successfully destroyed.'
   end
-  
+
   private
 
-def set_program
-  @program = Program.find(params[:id])
-end
+  def set_program
+    @program = Program.find(params[:id])
+  end
 
-def program_params
-  params.require(:program).permit(:name, :description)
-end
+  def program_params
+    params.require(:program).permit(:name, :description)
+  end
 
   def program_params_with_defaults
     {
-      name: 'New Program',
+      name: 'New Program'
     }
   end
 end

@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe WorkoutExercise, type: :model do
-  let(:user) { User.new(name: "John Doe", email: "john.doe@example.com", password: "password") }
-  let(:workout) { Workout.new(user: user) }
-  let(:exercise) { Exercise.new(name: "Push Up") }
+  let(:user) { User.new(name: 'John Doe', email: 'john.doe@example.com', password: 'password') }
+  let(:workout) { Workout.new(user:) }
+  let(:exercise) { Exercise.new(name: 'Push Up') }
 
-  subject {
+  subject do
     described_class.new(
-      workout: workout,
+      workout:,
       exercisable: exercise,
       combined_exercise_id: "Exercise-#{exercise.id}"
     )
-  }
+  end
 
   it 'is valid with valid attributes' do
     expect(subject).to be_valid
@@ -20,13 +20,13 @@ RSpec.describe WorkoutExercise, type: :model do
   it 'is invalid without a workout' do
     subject.workout = nil
     expect(subject).not_to be_valid
-    expect(subject.errors[:workout]).to include("must exist")
+    expect(subject.errors[:workout]).to include('must exist')
   end
 
   it 'is invalid without an exercisable' do
     subject.exercisable = nil
     expect(subject).not_to be_valid
-    expect(subject.errors[:exercisable]).to include("must exist")
+    expect(subject.errors[:exercisable]).to include('must exist')
   end
 
   it 'belongs to a workout' do
@@ -58,7 +58,7 @@ RSpec.describe WorkoutExercise, type: :model do
 
   it 'calls set_exercisable before validation' do
     workout_exercise = described_class.new(
-      workout: workout,
+      workout:,
       combined_exercise_id: "Exercise-#{exercise.id}"
     )
     expect(workout_exercise).to receive(:set_exercisable)

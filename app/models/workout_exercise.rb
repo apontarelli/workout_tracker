@@ -15,10 +15,10 @@ class WorkoutExercise < ApplicationRecord
 
   # Class Methods
   def set_exercisable
-    if combined_exercise_id.present?
-      type, id = combined_exercise_id.split('-')
-      self.exercisable_type = type
-      self.exercisable_id = id
-    end
+    return if combined_exercise_id.blank?
+
+    type, id = combined_exercise_id.split('-')
+    self.exercisable_type = type
+    self.exercisable_id = id
   end
 end

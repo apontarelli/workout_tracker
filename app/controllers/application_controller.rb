@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user!
-    unless logged_in?
-      redirect_to login_path
-    end
+    return if logged_in?
+
+    redirect_to login_path
   end
 end

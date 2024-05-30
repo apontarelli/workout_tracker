@@ -9,7 +9,7 @@ class Workout < ApplicationRecord
 
   # Validations
   validates :name, presence: true
-### Below should be deleted and fixed in controller
+  ### Below should be deleted and fixed in controller
   # Callbacks
   before_save :set_user_id
 
@@ -17,6 +17,6 @@ class Workout < ApplicationRecord
   private
 
   def set_user_id
-      self.user_id = current_user.id if user_id.blank?
+    self.user_id = current_user.id if user_id.blank?
   end
 end

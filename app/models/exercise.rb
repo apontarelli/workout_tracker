@@ -5,4 +5,4 @@ class Exercise < ApplicationRecord
 
   # Validations
   validates :name, presence: true, uniqueness: true
-  end
+end

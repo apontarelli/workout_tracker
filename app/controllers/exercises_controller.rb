@@ -7,8 +7,7 @@ class ExercisesController < ApplicationController
     @combined_exercises = combined_exercises(current_user)
   end
 
-  def show
-  end
+  def show; end
 
   def new_user_exercise
     @user_exercise = UserExercise.new
@@ -25,8 +24,7 @@ class ExercisesController < ApplicationController
     end
   end
 
-  def edit_user_exercise
-  end
+  def edit_user_exercise; end
 
   def update_user_exercise
     if @user_exercise.update(user_exercise_params)
@@ -48,6 +46,7 @@ class ExercisesController < ApplicationController
   end
 
   def user_exercise_params
-    params.require(:user_exercise).permit(:name, :primary_muscle_group, :equipment, :exercise_group, secondary_muscle_groups: [])
+    params.require(:user_exercise).permit(:name, :primary_muscle_group, :equipment, :exercise_group,
+                                          secondary_muscle_groups: [])
   end
 end

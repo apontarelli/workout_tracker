@@ -9,16 +9,16 @@ Rails.application.routes.draw do
   # Resourceful routes
   resources :workouts
   resources :programs do
-    resources :template_workouts, only: [:create, :edit, :update, :destroy]
+    resources :template_workouts, only: %i[create edit update destroy]
   end
 
-  resources :exercises, only: [:index, :show] do
+  resources :exercises, only: %i[index show] do
     collection do
       get 'new_user_exercise', to: 'exercises#new_user_exercise'
       post 'create_user_exercise', to: 'exercises#create_user_exercise'
     end
   end
-  
+
   resources :user_exercises, only: [] do
     member do
       get 'edit', to: 'exercises#edit_user_exercise'
@@ -27,12 +27,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:show, :create, :edit, :update]
+  resources :users, only: %i[show create edit update]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  get 'up' => 'rails/health#show', as: :rails_health_check
 
   # Defines the root path route ("/")
   # root "posts#index"

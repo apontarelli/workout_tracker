@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { 
+  subject do
     described_class.new(
-      name: "John Doe",
-      email: "john.doe@example.com",
-      password: "password"
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      password: 'password'
     )
-  }
+  end
 
   # Validation Tests
 
@@ -34,15 +34,15 @@ RSpec.describe User, type: :model do
   end
 
   it 'is invalid with a duplicate email' do
-    described_class.create!(name: "Jane Doe", email: "john.doe@example.com", password: "password")
+    described_class.create!(name: 'Jane Doe', email: 'john.doe@example.com', password: 'password')
     expect(subject).not_to be_valid
-    expect(subject.errors[:email]).to include("has already been taken")
+    expect(subject.errors[:email]).to include('has already been taken')
   end
 
   it 'is invalid with an improperly formatted email' do
     subject.email = 'invalid_email'
     expect(subject).not_to be_valid
-    expect(subject.errors[:email]).to include("is invalid")
+    expect(subject.errors[:email]).to include('is invalid')
   end
 
   # Password validation
@@ -59,11 +59,13 @@ RSpec.describe User, type: :model do
   it 'is invalid with a short password' do
     subject.password = 'short'
     expect(subject).not_to be_valid
-    expect(subject.errors[:password]).to include("is too short (minimum is 6 characters)")
+    expect(subject.errors[:password]).to include('is too short (minimum is 6 characters)')
   end
 
   context 'when updating an existing user' do
-    let(:existing_user) { described_class.create!(name: "John Doe", email: "john.doe@example.com", password: "password") }
+    let(:existing_user) do
+      described_class.create!(name: 'John Doe', email: 'john.doe@example.com', password: 'password')
+    end
 
     it 'is valid with a password of minimum length' do
       existing_user.password = 'password'
@@ -73,7 +75,7 @@ RSpec.describe User, type: :model do
     it 'is invalid with a short password' do
       existing_user.password = 'short'
       expect(existing_user).not_to be_valid
-      expect(existing_user.errors[:password]).to include("is too short (minimum is 6 characters)")
+      expect(existing_user.errors[:password]).to include('is too short (minimum is 6 characters)')
     end
 
     it 'is valid without changing the password' do
@@ -83,22 +85,22 @@ RSpec.describe User, type: :model do
   end
 
   # Associations
-  it 'should have many workouts' do
+  it 'has many workouts' do
     assoc = User.reflect_on_association(:workouts)
     expect(assoc.macro).to eq :has_many
   end
 
-  it 'should have many workout_templates' do
+  it 'has many workout_templates' do
     assoc = User.reflect_on_association(:workout_templates)
     expect(assoc.macro).to eq :has_many
   end
 
-  it 'should have many programs' do
+  it 'has many programs' do
     assoc = User.reflect_on_association(:programs)
     expect(assoc.macro).to eq :has_many
   end
 
-  it 'should have many user_exercises' do
+  it 'has many user_exercises' do
     assoc = User.reflect_on_association(:user_exercises)
     expect(assoc.macro).to eq :has_many
   end

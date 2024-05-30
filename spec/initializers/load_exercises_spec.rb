@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe "LoadExercisesInitializer", type: :request do
+RSpec.describe 'LoadExercisesInitializer', type: :request do
   it 'loads exercises from YAML file' do
     # Ensure the database is clean
     Exercise.delete_all
 
     # Manually run the initializer code
-    exercise_file = Rails.root.join('config', 'exercises.yml')
+    exercise_file = Rails.root.join('config/exercises.yml')
     exercises = YAML.load_file(exercise_file)['exercises']
 
     exercises.each do |exercise_data|

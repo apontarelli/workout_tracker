@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Program, type: :model do
-  subject { 
+  subject do
     described_class.new(
-      user: User.new(name: "John Doe", email: "john.doe@example.com", password: "password"),
-      name: "Program 1"
+      user: User.new(name: 'John Doe', email: 'john.doe@example.com', password: 'password'),
+      name: 'Program 1'
     )
-  }
+  end
 
   it 'is valid with valid attributes' do
     expect(subject).to be_valid
@@ -15,7 +15,7 @@ RSpec.describe Program, type: :model do
   it 'is invalid without a user' do
     subject.user = nil
     expect(subject).not_to be_valid
-    expect(subject.errors[:user]).to include("must exist")
+    expect(subject.errors[:user]).to include('must exist')
   end
 
   it 'can have many template workouts' do
