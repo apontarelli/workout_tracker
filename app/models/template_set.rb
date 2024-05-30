@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TemplateSet < ApplicationRecord
   # Associations
   belongs_to :template_exercise

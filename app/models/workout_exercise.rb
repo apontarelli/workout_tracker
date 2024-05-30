@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WorkoutExercise < ApplicationRecord
   # Attributes
   attr_accessor :combined_exercise_id

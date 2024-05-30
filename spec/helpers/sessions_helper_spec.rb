@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe SessionsHelper, type: :helper do
+RSpec.describe SessionsHelper do
   let(:user) { User.create!(name: 'John Doe', email: 'john.doe@example.com', password: 'password') }
 
   describe '#log_in' do

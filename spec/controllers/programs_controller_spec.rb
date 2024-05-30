@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe ProgramsController, type: :controller do
+RSpec.describe ProgramsController do
   let(:user) { create(:user) }
   let(:program) { create(:program, user:) }
 

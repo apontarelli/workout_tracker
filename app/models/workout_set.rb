@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WorkoutSet < ApplicationRecord
   # Associations
   belongs_to :workout_exercise

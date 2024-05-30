@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe TemplateWorkoutsController, type: :controller do
+RSpec.describe TemplateWorkoutsController do
   let(:user) { create(:user) }
   let(:program) { create(:program, user:) }
   let(:template_workout) { create(:template_workout, program:, user:) }

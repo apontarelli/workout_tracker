@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WorkoutsController < ApplicationController
   include ExercisesHelper
 
@@ -48,24 +50,21 @@ class WorkoutsController < ApplicationController
         }
       ]
     ).tap do |whitelisted|
-      if whitelisted[:workout_exercises_attributes]
-        whitelisted[:workout_exercises_attributes].each do |_key, exercise|
-          next unless exercise[:combined_exercise_id]
-  
-          type, id = exercise[:combined_exercise_id].split('-')
-          exercise[:exercisable_type] = type
-          exercise[:exercisable_id] = id
-          exercise.delete(:combined_exercise_id)
-        end
+      whitelisted[:workout_exercises_attributes]&.each_value do |exercise|
+        next unless exercise[:combined_exercise_id]
+
+        type, id = exercise[:combined_exercise_id].split('-')
+        exercise[:exercisable_type] = type
+        exercise[:exercisable_id] = id
+        exercise.delete(:combined_exercise_id)
       end
     end
   end
-  
 
   def workout_params_with_defaults
     {
       name: 'New Workout',
-      date: Date.today
+      date: Time.zone.today
     }
   end
 end

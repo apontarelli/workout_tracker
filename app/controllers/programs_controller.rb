@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProgramsController < ApplicationController
   before_action :set_program, only: %i[edit update destroy]
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateProgramWorkouts < ActiveRecord::Migration[7.1]
   def change
     create_table :program_workouts do |t|

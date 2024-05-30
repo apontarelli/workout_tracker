@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'yaml'
 
 begin
@@ -18,5 +20,5 @@ begin
     end
   end
 rescue ActiveRecord::NoDatabaseError, PG::ConnectionBad
-  puts 'No database connection found. Skipping load of exercises.'
+  Rails.logger.debug 'No database connection found. Skipping load of exercises.'
 end

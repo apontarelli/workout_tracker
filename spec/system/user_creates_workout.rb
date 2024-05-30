@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Commenting out for now until I can figure out how to get CSS/JS to load in my test environment
 # require 'rails_helper'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe NavbarComponent, type: :component do
@@ -9,7 +11,7 @@ RSpec.describe NavbarComponent, type: :component do
   end
 
   it 'renders the navbar with links to the different pages' do
-    render_inline(NavbarComponent.new(user))
+    render_inline(described_class.new(user))
 
     expect(rendered_content).to have_link('Dashboard', href: root_path)
     expect(rendered_content).to have_link('Workouts', href: workouts_path)

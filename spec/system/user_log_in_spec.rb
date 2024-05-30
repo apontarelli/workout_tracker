@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe 'User log in', type: :system do
+RSpec.describe 'User log in' do
   it 'allows a user to log in' do
     user = User.create!(name: 'John Doe', email: 'john.doe@example.com', password: 'password')
 
@@ -15,7 +17,7 @@ RSpec.describe 'User log in', type: :system do
   end
 
   it 'shows validation errors if form is submitted incorrectly' do
-    user = User.create!(name: 'John Doe', email: 'john.doe@example.com', password: 'password')
+    User.create!(name: 'John Doe', email: 'john.doe@example.com', password: 'password')
 
     visit login_path
 

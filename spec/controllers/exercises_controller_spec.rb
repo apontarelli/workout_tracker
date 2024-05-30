@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe ExercisesController, type: :controller do
+RSpec.describe ExercisesController do
   let(:user) do
     User.create!(name: 'John Doe', email: 'test@example.com', password: 'password', password_confirmation: 'password')
   end
@@ -55,29 +57,29 @@ RSpec.describe ExercisesController, type: :controller do
       it 'creates a new UserExercise' do
         expect do
           post :create_user_exercise,
-              params: {
-                user_exercise: {
-                  name: 'Squat',
-                  primary_muscle_group: 'Legs',
-                  secondary_muscle_groups: ['Glutes'],
-                  equipment: 'None',
-                  exercise_group: 'Strength'
-                }
-              }
+               params: {
+                 user_exercise: {
+                   name: 'Squat',
+                   primary_muscle_group: 'Legs',
+                   secondary_muscle_groups: ['Glutes'],
+                   equipment: 'None',
+                   exercise_group: 'Strength'
+                 }
+               }
         end.to change(UserExercise, :count).by(1)
       end
 
       it 'redirects to the exercises list' do
         post :create_user_exercise,
-            params: {
-              user_exercise: {
-                name: 'Squat',
-                primary_muscle_group: 'Legs',
-                secondary_muscle_groups: ['Glutes'],
-                equipment: 'None',
-                exercise_group: 'Strength'
-              }
-            }
+             params: {
+               user_exercise: {
+                 name: 'Squat',
+                 primary_muscle_group: 'Legs',
+                 secondary_muscle_groups: ['Glutes'],
+                 equipment: 'None',
+                 exercise_group: 'Strength'
+               }
+             }
         expect(response).to redirect_to(exercises_path)
       end
     end
@@ -85,15 +87,15 @@ RSpec.describe ExercisesController, type: :controller do
     context 'with invalid params' do
       it 'renders the new template' do
         post :create_user_exercise,
-            params: {
-              user_exercise: {
-                name: 'Squat',
-                primary_muscle_group: 'Legs',
-                secondary_muscle_groups: ['Glutes'],
-                equipment: 'None',
-                exercise_group: 'Strength'
-              }
-            }
+             params: {
+               user_exercise: {
+                 name: nil,
+                 primary_muscle_group: 'Legs',
+                 secondary_muscle_groups: ['Glutes'],
+                 equipment: 'None',
+                 exercise_group: 'Strength'
+               }
+             }
         expect(response).to render_template(:new_user_exercise)
       end
     end

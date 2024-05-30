@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExercisesHelper
   def combined_exercises(user)
     Exercise.all.map { |e| [e.name, "Exercise-#{e.id}"] } +

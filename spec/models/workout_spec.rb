@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Workout, type: :model do
+RSpec.describe Workout do
   let(:user) { User.create(name: 'John Doe', email: 'john.doe@example.com', password: 'password') }
   let(:program) { Program.create(user:, name: 'Program 1') }
   let(:exercise) { Exercise.create(name: 'Push Up') }

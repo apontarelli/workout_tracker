@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe TemplateExercise, type: :model do
+RSpec.describe TemplateExercise do
   let(:user) { User.create!(name: 'John Doe', email: 'john.doe@example.com', password: 'password') }
   let(:template_workout) { TemplateWorkout.create!(user:, name: 'Workout 1') }
   let(:exercise) { Exercise.create!(name: 'Push Up') }

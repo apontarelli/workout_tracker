@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TemplateWorkoutsController < ApplicationController
   include ExercisesHelper
 
@@ -59,19 +61,16 @@ class TemplateWorkoutsController < ApplicationController
         }
       ]
     ).tap do |whitelisted|
-      if whitelisted[:template_exercises_attributes]
-        whitelisted[:template_exercises_attributes].each do |_key, exercise|
-          next unless exercise[:combined_exercise_id]
-  
-          type, id = exercise[:combined_exercise_id].split('-')
-          exercise[:exercisable_type] = type
-          exercise[:exercisable_id] = id
-          exercise.delete(:combined_exercise_id)
-        end
+      whitelisted[:template_exercises_attributes]&.each_value do |exercise|
+        next unless exercise[:combined_exercise_id]
+
+        type, id = exercise[:combined_exercise_id].split('-')
+        exercise[:exercisable_type] = type
+        exercise[:exercisable_id] = id
+        exercise.delete(:combined_exercise_id)
       end
     end
   end
-  
 
   def template_workout_params_with_defaults
     {

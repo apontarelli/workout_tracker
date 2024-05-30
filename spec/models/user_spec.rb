@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   subject do
     described_class.new(
       name: 'John Doe',
@@ -86,22 +88,22 @@ RSpec.describe User, type: :model do
 
   # Associations
   it 'has many workouts' do
-    assoc = User.reflect_on_association(:workouts)
+    assoc = described_class.reflect_on_association(:workouts)
     expect(assoc.macro).to eq :has_many
   end
 
   it 'has many workout_templates' do
-    assoc = User.reflect_on_association(:workout_templates)
+    assoc = described_class.reflect_on_association(:workout_templates)
     expect(assoc.macro).to eq :has_many
   end
 
   it 'has many programs' do
-    assoc = User.reflect_on_association(:programs)
+    assoc = described_class.reflect_on_association(:programs)
     expect(assoc.macro).to eq :has_many
   end
 
   it 'has many user_exercises' do
-    assoc = User.reflect_on_association(:user_exercises)
+    assoc = described_class.reflect_on_association(:user_exercises)
     expect(assoc.macro).to eq :has_many
   end
 end

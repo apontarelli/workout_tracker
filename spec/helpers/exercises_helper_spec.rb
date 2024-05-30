@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe ExercisesHelper, type: :helper do
+RSpec.describe ExercisesHelper do
   let(:user) do
     User.create!(
       name: 'John Doe',

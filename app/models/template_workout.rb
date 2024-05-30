@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TemplateWorkout < ApplicationRecord
   # Associations
   belongs_to :program, optional: true

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe UserExercise, type: :model do
+RSpec.describe UserExercise do
   subject do
     described_class.new(
       user: User.new(name: 'John Doe', email: 'john.doe@example.com', password: 'password'),

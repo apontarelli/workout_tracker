@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Exercise < ApplicationRecord
   # Associations
   has_many :workout_exercises, as: :exercisable

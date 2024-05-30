@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe WorkoutsController, type: :controller do
+RSpec.describe WorkoutsController do
   let(:user) do
     User.create!(name: 'John Doe', email: 'test@example.com', password: 'password', password_confirmation: 'password')
   end
-  let(:workout) { Workout.create!(name: 'Workout 1', date: Date.today, user:) }
-  let(:valid_attributes) { { name: 'Workout 1', date: Date.today } }
+  let(:workout) { Workout.create!(name: 'Workout 1', date: Time.zone.today, user:) }
+  let(:valid_attributes) { { name: 'Workout 1', date: Time.zone.today } }
   let(:invalid_attributes) { { name: nil } }
 
   before do

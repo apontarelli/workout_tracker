@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Exercise, type: :model do
+RSpec.describe Exercise do
   subject do
     described_class.new(
       name: 'Test exercise',

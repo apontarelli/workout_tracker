@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFieldsToUserExercises < ActiveRecord::Migration[7.1]
   def change
     add_column :user_exercises, :primary_muscle_group, :string
