@@ -11,9 +11,9 @@ RSpec.describe 'User log out' do
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'password'
 
-    click_button 'Log in'
-    click_link 'User'
-    click_link 'Log out'
+    click_link_or_button 'Log in'
+    click_link_or_button 'User'
+    click_link_or_button 'Log out'
 
     expect(page).to have_content('You are not logged in')
   end

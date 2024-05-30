@@ -7,6 +7,9 @@ require:
 
 AllCops:
   NewCops: enable
+  Exclude:
+    - 'db/migrate/*.rb'
+    - 'db/schema.rb'
 
 # Add your customizations below
 # For example, to generate a todo list and ignore current issues:

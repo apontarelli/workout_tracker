@@ -5,6 +5,7 @@ class NavbarComponent < ViewComponent::Base
   include SessionsHelper
 
   def initialize(user)
+    super()
     @user = user
   end
 

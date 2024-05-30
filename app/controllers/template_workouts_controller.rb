@@ -41,6 +41,12 @@ class TemplateWorkoutsController < ApplicationController
     redirect_to edit_program_path(@program), notice: 'Program workout was successfully destroyed.'
   end
 
+  def template_workout_params
+    whitelisted = params.require(:template_workout).permit(*permitted_template_workout_attributes)
+    process_combined_exercise_ids(whitelisted[:template_exercises_attributes])
+    whitelisted
+  end
+
   private
 
   def set_program
@@ -51,24 +57,24 @@ class TemplateWorkoutsController < ApplicationController
     @template_workout = @program.template_workouts.find(params[:id])
   end
 
-  def template_workout_params
-    params.require(:template_workout).permit(
+  def permitted_template_workout_attributes
+    [
       :name,
-      template_exercises_attributes: [
+      { template_exercises_attributes: [
         :id, :exercise_id, :combined_exercise_id, :notes, :_destroy,
-        {
-          template_sets_attributes: %i[id reps weight _destroy exercise_entry_id exercise_entry_type]
-        }
-      ]
-    ).tap do |whitelisted|
-      whitelisted[:template_exercises_attributes]&.each_value do |exercise|
-        next unless exercise[:combined_exercise_id]
+        { template_sets_attributes: %i[id reps weight _destroy exercise_entry_id exercise_entry_type] }
+      ] }
+    ]
+  end
 
-        type, id = exercise[:combined_exercise_id].split('-')
-        exercise[:exercisable_type] = type
-        exercise[:exercisable_id] = id
-        exercise.delete(:combined_exercise_id)
-      end
+  def process_combined_exercise_ids(template_exercises_attributes)
+    template_exercises_attributes&.each_value do |exercise|
+      next unless exercise[:combined_exercise_id]
+
+      type, id = exercise[:combined_exercise_id].split('-')
+      exercise[:exercisable_type] = type
+      exercise[:exercisable_id] = id
+      exercise.delete(:combined_exercise_id)
     end
   end
 

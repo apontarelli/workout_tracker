@@ -9,17 +9,17 @@
 # Offense count: 7
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: link_or_button, strict
-Capybara/ClickLinkOrButtonStyle:
-  Exclude:
-    - 'spec/system/user_log_in_spec.rb'
-    - 'spec/system/user_log_out_spec.rb'
-    - 'spec/system/user_sign_up_spec.rb'
+# Capybara/ClickLinkOrButtonStyle:
+#   Exclude:
+#     - 'spec/system/user_log_in_spec.rb'
+#     - 'spec/system/user_log_out_spec.rb'
+#     - 'spec/system/user_sign_up_spec.rb'
 
 # Offense count: 1
 # Configuration parameters: AllowedParentClasses.
-Lint/MissingSuper:
-  Exclude:
-    - 'app/components/navbar_component.rb'
+# Lint/MissingSuper:
+#   Exclude:
+#     - 'app/components/navbar_component.rb'
 
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -31,13 +31,13 @@ Lint/MissingSuper:
 # Offense count: 1
 # Configuration parameters: CountComments, CountAsOne, AllowedMethods, AllowedPatterns, inherit_mode.
 # AllowedMethods: refine
-Metrics/BlockLength:
-  Max: 26
+# Metrics/BlockLength:
+#   Max: 26
 
 # Offense count: 4
 # Configuration parameters: CountComments, CountAsOne, AllowedMethods, AllowedPatterns.
-Metrics/MethodLength:
-  Max: 18
+# Metrics/MethodLength:
+#   Max: 18
 
 # Offense count: 2
 RSpec/AnyInstance:

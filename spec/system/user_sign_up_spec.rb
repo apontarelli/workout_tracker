@@ -11,7 +11,7 @@ RSpec.describe 'User sign up' do
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
 
-    click_button 'Create User'
+    click_link_or_button 'Create User'
 
     expect(page).to have_content('Dashboard')
     expect(page).to have_content('John Doe')
@@ -25,7 +25,7 @@ RSpec.describe 'User sign up' do
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'mismatch'
 
-    click_button 'Create User'
+    click_link_or_button 'Create User'
 
     expect(page).to have_content('Name can\'t be blank')
     expect(page).to have_content('Email is invalid')

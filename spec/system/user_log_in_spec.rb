@@ -11,7 +11,7 @@ RSpec.describe 'User log in' do
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'password'
 
-    click_button 'Log in'
+    click_link_or_button 'Log in'
 
     expect(page).to have_content('Dashboard#home')
   end
@@ -24,7 +24,7 @@ RSpec.describe 'User log in' do
     fill_in 'Email', with: ''
     fill_in 'Password', with: ''
 
-    click_button 'Log in'
+    click_link_or_button 'Log in'
 
     expect(page).to have_content('You are not logged in')
   end
