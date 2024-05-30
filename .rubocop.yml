@@ -1,0 +1,26 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-rspec_rails
+
+AllCops:
+  NewCops: enable
+
+# Add your customizations below
+# For example, to generate a todo list and ignore current issues:
+inherit_from: .rubocop_todo.yml
+
+# Example customization
+Rails:
+  Enabled: true
+
+RSpec:
+  Enabled: true
+
+Capybara:
+  Enabled: true
+
+FactoryBot:
+  Enabled: true

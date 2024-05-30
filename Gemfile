@@ -35,6 +35,13 @@ gem "view_component"
 
 gem "rails-ujs"
 
+gem 'rubocop', require: false
+gem 'rubocop-rails', require: false
+gem 'rubocop-rspec', require: false
+gem 'rubocop-capybara', require: false
+gem 'rubocop-factory_bot', require: false
+gem 'rubocop-rspec_rails', require: false
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
